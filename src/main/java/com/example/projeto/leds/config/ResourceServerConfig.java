@@ -3,7 +3,6 @@ package com.example.projeto.leds.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,9 +39,10 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/pessoa")
-			.permitAll()
-			.anyRequest().authenticated()
+		http.authorizeRequests().anyRequest().permitAll()
+			//.antMatchers("/pessoa").permitAll()
+			//.antMatchers("/tarefa").permitAll()
+			//.anyRequest().authenticated()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
@@ -52,8 +52,10 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
     public void configure(WebSecurity web) throws Exception {
-    	//web.ignoring().antMatchers("/*");
-//        web.ignoring().antMatchers("/*/*");
+    	web.ignoring().antMatchers("/*");
+    	web.ignoring().antMatchers("/pessoa/*");
+        web.ignoring().antMatchers("/tarefa/*");
+        web.ignoring().antMatchers("/tarefa/pessoa/*");
 //        web.ignoring().antMatchers("/*/*/*");
     }
 	

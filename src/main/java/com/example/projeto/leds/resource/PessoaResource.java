@@ -23,11 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projeto.leds.event.RecursoCriadoEvent;
 import com.example.projeto.leds.model.Pessoa;
+import com.example.projeto.leds.model.Usuario;
 import com.example.projeto.leds.repository.PessoaRepository;
 
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaResource {
+	
+	@Autowired
+	private UsuarioResource usuarioResource;
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
@@ -49,10 +53,15 @@ public class PessoaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
-		Pessoa pessoaSalva = this.pessoaRepository.save(pessoa);
+	public ResponseEntity<Usuario> criar(@Valid @RequestBody Usuario usuario, HttpServletResponse response){
+		Pessoa novaPessoa = new Pessoa();
+		novaPessoa.setEmail(usuario.getEmail());
+		novaPessoa.setNome(usuario.getNome());
+		
+		Pessoa pessoaSalva = this.pessoaRepository.save(novaPessoa);
 		this.publisher.publishEvent(new RecursoCriadoEvent(this, response, pessoaSalva.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
+
+		return this.usuarioResource.cadastrar(usuario, response);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -77,6 +86,7 @@ public class PessoaResource {
 				}).orElseThrow(() -> new NoSuchElementException());
 		
 	}
+	
 	
 	
 	

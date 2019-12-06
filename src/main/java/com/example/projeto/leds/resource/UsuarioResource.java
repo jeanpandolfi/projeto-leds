@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,11 +21,11 @@ public class UsuarioResource {
 	@Autowired
 	private UsuarioRepository user;
 	
-	@PutMapping
-	public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario pessoa, HttpServletResponse response) {
-		pessoa.setSenha(this.converter(pessoa.getSenha()));
-		Usuario user = this.user.save(pessoa);
-		return ResponseEntity.status(HttpStatus.CREATED).body(user);
+	@PostMapping
+	public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario usuario, HttpServletResponse response) {
+		usuario.setSenha(this.converter(usuario.getSenha()));
+		Usuario userSave = this.user.save(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).body(userSave);
 	}
 	
 	private String converter(String senha) {
