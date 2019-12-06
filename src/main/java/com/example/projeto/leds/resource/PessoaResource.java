@@ -1,6 +1,7 @@
 package com.example.projeto.leds.resource;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -73,7 +74,7 @@ public class PessoaResource {
 					
 					return ResponseEntity.ok().body(pessoaUpdate);
 				
-				}).orElseThrow();
+				}).orElseThrow(() -> new NoSuchElementException());
 		
 	}
 	

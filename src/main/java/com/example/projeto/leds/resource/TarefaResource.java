@@ -1,6 +1,7 @@
 package com.example.projeto.leds.resource;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
@@ -69,7 +70,7 @@ public class TarefaResource {
 					
 					return ResponseEntity.ok().body(tarefaUpdate);
 				
-				}).orElseThrow();
+				}).orElseThrow(() -> new NoSuchElementException());
 		
 	}
 	
@@ -77,7 +78,7 @@ public class TarefaResource {
 	public ResponseEntity<?> buscarPeloId(@PathVariable Long id) {
 		Optional<Tarefa> pessoaFind = this.tarefaRepository.findById(id);
 		
-		//Tratando se caso a pessoa não existir
+		
 		return !pessoaFind.isEmpty() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
 	}
 	
