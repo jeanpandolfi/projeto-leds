@@ -45,7 +45,7 @@ public class PessoaResource {
 		Optional<Pessoa> pessoaFind = this.pessoaRepository.findById(id);
 		
 		//Tratando se caso a pessoa não existir
-		return !pessoaFind.isEmpty() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
+		return pessoaFind.isPresent() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping

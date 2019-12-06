@@ -79,7 +79,7 @@ public class TarefaResource {
 		Optional<Tarefa> pessoaFind = this.tarefaRepository.findById(id);
 		
 		
-		return !pessoaFind.isEmpty() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
+		return pessoaFind.isPresent() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
 	}
 	
 	
