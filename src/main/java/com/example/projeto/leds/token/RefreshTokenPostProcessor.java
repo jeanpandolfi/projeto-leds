@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.example.projeto.leds.config.property.ProjetoLedsProperty;
 
 @ControllerAdvice
-/*Classe que vai interceptar o Access Token para poder retirara o Refesh Tken do Body e Adicionar no Cookie
+/*Classe que vai interceptar o Access Token para poder retirara o Refresh Token do Body e Adicionar no Cookie
  * Passa como parametro da classe O tipo de Dado que deve ser interceptado*/
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken>{
 	
