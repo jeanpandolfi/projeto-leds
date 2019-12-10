@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("projetoleds")
 public class ProjetoLedsProperty {
 	
-	private String origemPermitida = "http://localhost:8000";
+	private String origemPermitida = "*";
 	
 	public String getOrigemPermitida() {
 		return origemPermitida;
