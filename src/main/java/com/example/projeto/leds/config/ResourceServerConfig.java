@@ -56,6 +56,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
     	web.ignoring().antMatchers("/pessoa/*");
         web.ignoring().antMatchers("/tarefa/*");
         web.ignoring().antMatchers("/tarefa/pessoa/*");
+        web.ignoring().antMatchers("/user/*");
 //        web.ignoring().antMatchers("/*/*/*");
     }
 	
