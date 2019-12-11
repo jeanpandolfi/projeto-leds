@@ -9,14 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projeto.leds.model.Usuario;
 import com.example.projeto.leds.repository.UsuarioRepository;
 
 @RestController
-@RequestMapping("/user")
 public class UsuarioResource {
 	@Autowired
 	private UsuarioRepository user;
