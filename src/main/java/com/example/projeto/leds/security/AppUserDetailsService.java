@@ -25,9 +25,14 @@ public class AppUserDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		//System.out.println("Email vindo do cliente: " + email);
 		Optional<Usuario> usuario = this.usuarioRepository.findByEmail(email); 
-		Usuario user = usuario.orElseThrow(() -> new UsernameNotFoundException("Usuario ou senha inválidos"));
-		return new User(email, user.getSenha(), getPermissoes());
+		
+		//System.out.println("Usuário retornado do banco: "+ usuario.get().getEmail()+" "+usuario.get().getSenha());
+		Usuario user = usuario.orElseThrow(() -> new UsernameNotFoundException("Usuário ou senha inválidos"));
+		User us = new User(email, user.getSenha(), getPermissoes());
+		System.out.println("User: "+us.getUsername()+" senha: "+us.getPassword() );
+		return us;
 	}
 
 	private Collection<? extends GrantedAuthority> getPermissoes() {

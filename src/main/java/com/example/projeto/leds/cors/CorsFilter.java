@@ -7,17 +7,23 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.example.projeto.leds.config.property.ProjetoLedsProperty;
+
 @Component
 public class CorsFilter extends OncePerRequestFilter{
-
+	
+	@Autowired	
+	private ProjetoLedsProperty property;
+	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
-		response.addHeader("Access-Control-Allow-Origin","*");
+		response.addHeader("Access-Control-Allow-Origin",property.getOrigemPermitida()); //TODO: confugurar para diferentes Ambientes
 		response.addHeader("Access-Control-Allow-Methods"," POST, GET, OPTIONS, DELETE, PUT");
 		response.addHeader("Access-Control-Allow-Credentials","true");
 		response.addHeader("Access-Control-Allow-Headers",
@@ -34,7 +40,7 @@ public class CorsFilter extends OncePerRequestFilter{
 //public class CorsFilter implements Filter{
 //	
 //	@Autowired	
-//	private ProjetoLedsProperty property; //TODO: confugurar para diferentes Ambientes
+//	private ProjetoLedsProperty property; 
 //	
 //	@Override
 //	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

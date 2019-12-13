@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
@@ -32,7 +33,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		clients.inMemory()
 		.withClient("angular")
 		.secret(passwordEncoder().encode("angular"))
-		//.secret("angular")
 		.scopes("read", "write")
 		.authorizedGrantTypes("password", "refresh_token")
 		.accessTokenValiditySeconds(20)
@@ -47,8 +47,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		endpoints
 			.tokenStore( tokenStore())
 			.tokenEnhancer(tokenEnhancerChain)
-			.reuseRefreshTokens(false)	// TODO: Tem no Sandro
-			//.accessTokenConverter(accessTokenConverter()) 	// TODO: Não tem no Sandro
+			.reuseRefreshTokens(false)
 			.authenticationManager(authenticationManager);
 		
 	}
@@ -62,7 +61,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-		accessTokenConverter.setSigningKey("algaworks");
+		accessTokenConverter.setSigningKey("projetoleds");
 		
 		return accessTokenConverter;	
 	}

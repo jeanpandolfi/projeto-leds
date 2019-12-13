@@ -4,8 +4,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("projetoleds")
 public class ProjetoLedsProperty {
-	
+	/* Configuração da origem permitida para o CORS */
 	private String origemPermitida = "*";
+	
+	private final Seguranca seguranca = new Seguranca();
+	
 	
 	public String getOrigemPermitida() {
 		return origemPermitida;
@@ -15,15 +18,10 @@ public class ProjetoLedsProperty {
 		this.origemPermitida = origemPermitida;
 	}
 
-
-
-	private final Seguranca seguranca = new Seguranca();
 	
 	public Seguranca getSeguranca() {
 		return seguranca;
 	}
-
-
 
 	public static class Seguranca{
 		

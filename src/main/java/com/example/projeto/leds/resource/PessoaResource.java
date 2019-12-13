@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.projeto.leds.event.RecursoCriadoEvent;
 import com.example.projeto.leds.model.Pessoa;
+import com.example.projeto.leds.model.Tarefa;
 import com.example.projeto.leds.model.Usuario;
 import com.example.projeto.leds.repository.PessoaRepository;
 
@@ -32,6 +33,9 @@ public class PessoaResource {
 	
 	@Autowired
 	private UsuarioResource usuarioResource;
+	
+	@Autowired
+	private TarefaResource tarefaResource;
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
@@ -87,7 +91,14 @@ public class PessoaResource {
 		
 	}
 	
-	
-	
+	/*
+	 * Listar Tarefas da Pessoa Logada
+	 */
+	@GetMapping("/tarefa")
+	public ResponseEntity<List<Tarefa>> findTarefaByPessoa(@PathVariable Long id){
+		
+		return this.tarefaResource.findTarefaByPessoa(id);
+				
+	}
 	
 }
