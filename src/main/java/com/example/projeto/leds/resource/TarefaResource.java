@@ -77,8 +77,7 @@ public class TarefaResource {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarPeloId(@PathVariable Long id) {
 		Optional<Tarefa> pessoaFind = this.tarefaRepository.findById(id);
-		
-		
+				
 		return pessoaFind.isPresent() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
 	}
 	
