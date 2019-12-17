@@ -8,7 +8,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,13 +24,14 @@ public class AppUserDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		//System.out.println("Email vindo do cliente: " + email);
-		Optional<Usuario> usuario = this.usuarioRepository.findByEmail(email); 
+		System.out.println("Email vindo do cliente: " + email);
+		Optional<Usuario> usuarioOptional = this.usuarioRepository.findByEmail(email); 
 		
 		//System.out.println("Usuário retornado do banco: "+ usuario.get().getEmail()+" "+usuario.get().getSenha());
-		Usuario user = usuario.orElseThrow(() -> new UsernameNotFoundException("Usuário ou senha inválidos"));
-		User us = new User(email, user.getSenha(), getPermissoes());
-		System.out.println("User: "+us.getUsername()+" senha: "+us.getPassword() );
+		Usuario user = usuarioOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário ou senha inválidos"));
+		
+		UsuarioSistema us = new UsuarioSistema(user, getPermissoes());
+		System.out.println("User logado: "+us.getUsername()+" Senha: "+us.getPassword() );
 		return us;
 	}
 

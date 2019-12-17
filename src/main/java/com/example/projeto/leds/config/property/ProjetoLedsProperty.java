@@ -5,7 +5,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("projetoleds")
 public class ProjetoLedsProperty {
 	/* Configuração da origem permitida para o CORS */
-	private String origemPermitida = "*";
+	//private String origemPermitida = "http://172.16.36.6:4200";
+	private String origemPermitida = "http://localhost:4200";
 	
 	private final Seguranca seguranca = new Seguranca();
 	
