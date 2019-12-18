@@ -6,5 +6,6 @@ public class GeradorDeSenha {
 	public static void main(String[] args) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		System.out.println(encoder.encode("ana"));
+		System.out.println(encoder.encode("jean"));
 	}
 }
