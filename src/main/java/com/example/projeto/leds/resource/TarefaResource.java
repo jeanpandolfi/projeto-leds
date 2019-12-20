@@ -28,7 +28,7 @@ import com.example.projeto.leds.repository.TarefaRepository;
 
 
 @RestController
-@RequestMapping("tarefa")
+@RequestMapping("/tarefa")
 public class TarefaResource {
 	
 	@Autowired
@@ -43,9 +43,9 @@ public class TarefaResource {
 	}
 	
 	@PostMapping
-	private ResponseEntity<Tarefa> criar(Tarefa tarefa , HttpServletResponse  response) {
+	private ResponseEntity<Tarefa> criar(@Valid @RequestBody Tarefa tarefa , HttpServletResponse  response) {
 		
-		@Valid Tarefa categoriaSalva = this.tarefaRepository.save(tarefa);
+		Tarefa categoriaSalva = this.tarefaRepository.save(tarefa);
 		this.publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getId()));
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
@@ -75,10 +75,10 @@ public class TarefaResource {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> buscarPeloId(@PathVariable Long id) {
+	public ResponseEntity<Tarefa> buscarPeloId(@PathVariable Long id) {
 		Optional<Tarefa> pessoaFind = this.tarefaRepository.findById(id);
 				
-		return pessoaFind.isPresent() ? ResponseEntity.ok(pessoaFind) : ResponseEntity.notFound().build();
+		return pessoaFind.isPresent() ? ResponseEntity.ok(pessoaFind.get()) : ResponseEntity.notFound().build();
 	}
 	
 	

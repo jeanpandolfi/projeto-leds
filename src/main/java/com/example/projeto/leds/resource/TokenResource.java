@@ -27,6 +27,11 @@ public class TokenResource {
 		cookie.setPath(request.getContextPath() + "/oauth/token");
 		cookie.setMaxAge(0);
 		
+		//System.out.println("\n\nHEADER " + request.getHeader("Authorization") + "\n\n");
+		//JwtAccessTokenConverter accessTokenConverter = request.getHeader("Authorization");
+		response.setHeader("Authorization", "");
+		response.resetBuffer();
+		
 		response.addCookie(cookie);
 		response.setStatus(HttpStatus.NO_CONTENT.value());
 	}
