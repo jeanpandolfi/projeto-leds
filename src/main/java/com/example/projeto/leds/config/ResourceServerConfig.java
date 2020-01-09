@@ -41,8 +41,6 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			//.antMatchers("/pessoa").permitAll()
-			//.antMatchers("/tarefa").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -65,8 +63,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 //        web.ignoring().antMatchers("/*/*/*");
     }
 	
-	
-	
+
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
