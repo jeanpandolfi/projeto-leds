@@ -53,6 +53,7 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity web) throws Exception {
     	//web.ignoring().antMatchers("/*");
     	web.ignoring().antMatchers(HttpMethod.POST, "/pessoa");
+    	//web.ignoring().antMatchers(HttpMethod.GET, "/pessoa");
 //        web.ignoring().antMatchers("/oauth/token");
 //        web.ignoring().antMatchers("/tarefa/pessoa/*");
 //        web.ignoring().antMatchers("/tarefa");
